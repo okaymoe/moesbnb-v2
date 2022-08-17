@@ -13,7 +13,7 @@ Welcome to moesbnb! The functionality and essence similarly mimics airbnb. With 
 **Take a trip to moesbnb:** https://moesbnb.herokuapp.com/
 
 ## **Home** ##
-Upon landing on the home page, you may sign up or log in if you already have an account. If you wish to not create an account for convenience or confidential reasons, you may click the "Demo User" button on the navigation bar, which can be previewed below. After logging in or creating an account, you will be granted access to view all the Spots that have been created by hosts. If you create a spot, yours will be on this page too. You will also notice a navigation button render at the top right of the site, which will display your username, email, a button to view your profile.
+Upon landing on the home page, you may sign up or log in if you already have an account. If you wish to not create an account for convenience or confidential reasons, you may click the "Demo User" button on the navigation bar, which can be previewed below. After logging in or creating an account, you will be granted access to create a spot and leave reviews under spots. If you create a spot, yours will be on this page too. You will also notice a navigation button render at the top right of the site, which will display your username, email, a button to view your profile.
 
 ![abb](https://user-images.githubusercontent.com/97005259/185054226-6c62b9dc-1ab6-4572-82bc-59506057b795.PNG)
 
