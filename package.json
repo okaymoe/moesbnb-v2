@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/okaymoe/moesbnb-v2/issues"
   },
-  "homepage": "https://github.com/okaymoe/moesbnb-v2#readme"
+  "homepage": "https://github.com/okaymoe/moesbnb-v2#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1211.0"
+  }
 }
