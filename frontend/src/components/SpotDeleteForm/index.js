@@ -29,7 +29,7 @@ const SpotDeleteForm = () => {
 
     return (
         <div id='spot-delete-form'>
-        <p>Type the name if this spot and press 'Delete' to confirm this action.</p>
+        <p>Type the name of this spot and press the Delete button to confirm this action.</p>
         {errors.length > 0 ?
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
