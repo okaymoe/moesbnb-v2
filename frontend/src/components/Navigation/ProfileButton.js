@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
+import { removeAllFavoriteThunk } from '../../store/favorite';
 import './Navigation.css';
-import DehazeIcon from '@mui/icons-material/Dehaze';
 
 function ProfileButton({ user }) {
     const history = useHistory();
@@ -22,7 +22,7 @@ function ProfileButton({ user }) {
         const emails = ['demo@user.io', 'user1@user.io', 'user2@user.io'];
         return dispatch(sessionActions.login({
             credential: emails[Math.floor(Math.random()*emails.length)],
-            password: 'password'
+            password: 'P@ssw0rd!'
         }))
     }
 
@@ -41,6 +41,7 @@ function ProfileButton({ user }) {
     const logout = (e) => {
         e.preventDefault();
         dispatch(sessionActions.logout());
+        dispatch(removeAllFavoriteThunk());
     };
 
     return (

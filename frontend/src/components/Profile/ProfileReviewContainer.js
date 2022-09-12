@@ -3,7 +3,7 @@ const ProfileReviewContainer = ({ reviews }) => {
         <div className='review-container'>
             <p className='list-title'>Your Reviews:</p>
             <div className='review-list'>
-                {reviews ?
+                {reviews && Object.keys(reviews).length > 0 ?
                     Object.values(reviews).map((ele, i) => {
                         return (
                             <div key={i} className='individual-review-container'>
@@ -14,7 +14,7 @@ const ProfileReviewContainer = ({ reviews }) => {
                             </div>
                         )
                     })
-                : null}
+                : <p>No reviews have been made on this account.</p>}
             </div>
         </div>
     );

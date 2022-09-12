@@ -9,7 +9,16 @@ import {
 // Booking Actions
 import {
   SET_BOOKING,
-} from './booking.js'
+} from './booking.js';
+
+// Favorite Actions
+import {
+  DELETE_FAVORITE,
+  GET_ALL_FAVORITE,
+  GET_FAVORITE,
+  SET_FAVORITE,
+  REMOVE_ALL_FAVORITE
+} from './favorite.js';
 
 // Spot Actions
 const SET_SPOT = 'spot/SET_SPOT';
@@ -29,7 +38,7 @@ const loadSpot = (spot, images, reviews, bookings) => ({
   spot,
   images,
   reviews,
-  bookings
+  bookings,
 });
 
 const loadAllSpots = (data) => ({
@@ -97,9 +106,9 @@ export const getAllSpots = () => async dispatch => {
   const response = await csrfFetch(`/api/spots/all`);
 
   if (response.ok) {
-    const data = await response.json();
-    dispatch(loadAllSpots(data));
-    return data;
+    const payload = await response.json();
+    dispatch(loadAllSpots(payload));
+    return payload;
   }
 }
 
@@ -206,7 +215,7 @@ const spotReducer = (state = initialState, action) => {
         },
         bookings: bookingObj,
         images: imgObj,
-        reviews: reviewObj,
+        reviews: reviewObj
       };
     }
     case LOAD_ALL_SPOT: {
@@ -227,7 +236,8 @@ const spotReducer = (state = initialState, action) => {
           name: spot.name,
           price: spot.price,
           avgRating,
-          images: imgObj
+          images: imgObj,
+          favorite: false
         }
       });
       return newState;
@@ -271,6 +281,45 @@ const spotReducer = (state = initialState, action) => {
     case SET_BOOKING: {
       newState = { ...state }
       newState.bookings[action.booking.userId] = action.booking.userId
+      return newState;
+    }
+    case GET_ALL_FAVORITE: {
+      newState = { ...state }
+      let favorites = [];
+      if (action.data.length) favorites = action.data.map(e => e.spotId);
+      favorites.forEach(spotId => newState[spotId].favorite = true);
+      return newState;
+    }
+    case GET_FAVORITE: {
+      if (action.data) {
+        newState = { ...state }
+        newState.data['favorite'] = true;
+      }
+      if (newState) return newState;
+    }
+    case REMOVE_ALL_FAVORITE: {
+      newState = { ...state }
+      for (let i of Object.keys(newState)) {
+        if (newState[i].favorite) newState[i].favorite = false;
+      }
+      return newState;
+    }
+    case SET_FAVORITE: {
+      newState = { ...state }
+      if (newState[action.data.spotId]) {
+        newState[action.data.spotId].favorite = true;
+      } else {
+        newState.data.favorite = true;
+      }
+      return newState;
+    }
+    case DELETE_FAVORITE: {
+      newState = { ...state }
+      if (newState[action.data.spotId]) {
+        newState[action.data.spotId].favorite = false;
+      } else {
+        newState.data.favorite = false;
+      }
       return newState;
     }
     default:
